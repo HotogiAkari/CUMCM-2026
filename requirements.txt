@@ -1,0 +1,5 @@
+# Runtime dependencies (import-level requirements of src/drying_model).
+numpy>=1.26,<3
+scipy>=1.11,<2
+openpyxl>=3.1,<4
+PyYAML>=6,<7

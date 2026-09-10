@@ -1,0 +1,17 @@
+{
+  "q3_event_time_s_raw": 59286.17508875796,
+  "q4_event_time_s_raw": 70759.97874952822,
+  "q3_max_C_at_event": 0.15000000000000002,
+  "q4_max_C_at_event": 0.15000000000000002,
+  "q3_hours": 16.468381969099433,
+  "q4_hours": 19.655549652646727,
+  "event_definition": "max_i C_i - 0.15 (node values, terminal, direction=-1)",
+  "grid": {
+    "q3_radial_intervals": 320,
+    "q3_nodes": 321,
+    "q3_node_centred_control_volumes": 321,
+    "q4_radial_intervals": 320,
+    "q4_nodes": 321,
+    "q4_node_centred_control_volumes": 321
+  }
+}

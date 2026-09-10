@@ -1,0 +1,122 @@
+{
+  "python_version": "3.12.3",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "dependency_versions": {
+    "numpy": "1.26.4",
+    "scipy": "1.11.4",
+    "pandas": "2.1.4",
+    "openpyxl": "3.1.2"
+  },
+  "config_path": "/root/OpenClaw/work/CUMCM-2026/configs/main.yaml",
+  "input_hashes": {
+    "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+    "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af"
+  },
+  "diffusivity_temperature_term": "arrhenius_inverse_T",
+  "selected_grid": {
+    "radial_intervals": 320,
+    "nodes": 321,
+    "node_centred_control_volumes": 321,
+    "first_last_control_volume": "half-width",
+    "grid_type": "node-centered r_i=i*dr (i=0..N), faces at node midpoints"
+  },
+  "solver_tolerances": {
+    "rtol": 1e-08,
+    "atol_temperature": 1e-08,
+    "atol_moisture": 1e-10,
+    "max_step_early": 60.0,
+    "max_step_late": 600.0
+  },
+  "environment_post_4h_mode": "tail_1h_mean",
+  "radius_interpolation": "pchip",
+  "event": {
+    "definition": "max_i C_i - 0.15",
+    "terminal": true,
+    "direction": -1.0
+  },
+  "event_times_unrounded_s": {
+    "q3": 59286.17508875796,
+    "q4": 70759.97874952822,
+    "q3_event": {
+      "t_event": 59286.175088757955,
+      "t_refined": 59286.17508875796,
+      "g_left": 0.0007564590812215999,
+      "g_right": -0.0007507808333626631,
+      "brent_executed": true
+    },
+    "q4_event": {
+      "t_event": 70759.97874952822,
+      "t_refined": 70759.97874952822,
+      "g_left": 0.0007824407475385542,
+      "g_right": -0.0007764342896505461,
+      "brent_executed": true
+    }
+  },
+  "wall_seconds": {
+    "q1": 0.43389177322387695,
+    "q23": 3.471571445465088,
+    "q4": 4.313911437988281
+  },
+  "validation_status": [
+    "grid geometry: OK",
+    "finite trajectories: OK",
+    "result matrices finite: OK",
+    "physical ranges: OK",
+    "Q3 critical state: max_i C_i = 0.150000000000 at t = 59286.175089 s",
+    "   integer safe time with max C strictly < 0.15: 59287 s",
+    "Q4 critical state: max_i c_i = 0.150000000000 at t = 70759.978750 s",
+    "   integer safe time with max C strictly < 0.15: 70760 s",
+    "Q3 safe integer time 59287 s: max C = 0.149994820 (strictly < 0.15)",
+    "Q4 safe integer time 70760 s: max C = 0.149999862 (strictly < 0.15)",
+    "centre moisture non-increasing: checked",
+    "excel result1.xlsx: sheets/cols/rows/finiteness OK",
+    "excel result2.xlsx: sheets/cols/rows/finiteness OK",
+    "excel result3.xlsx: sheets/cols/rows/finiteness OK",
+    "excel result3.xlsx: critical-row max C = 0.150000 (expected approximately 0.15)",
+    "excel result3.xlsx: row before critical max C = 0.150039 (> 0.15, crossing confirmed)",
+    "excel result4.xlsx: sheets/cols/rows/finiteness OK",
+    "excel result4.xlsx: critical-row max C = 0.150000 (expected approximately 0.15)",
+    "excel result4.xlsx: row before critical max C = 0.150130 (> 0.15, crossing confirmed)"
+  ],
+  "output_files": [
+    "result/result1.xlsx",
+    "result/result2.xlsx",
+    "result/result3.xlsx",
+    "result/result4.xlsx"
+  ],
+  "diagnostics_files": [
+    "space.csv",
+    "tolerance.csv",
+    "conservation_residuals.csv",
+    "event_trace_q3.csv",
+    "event_trace_q4.csv",
+    "event_raw.json"
+  ],
+  "raw_event": {
+    "q3_event_time_s_raw": 59286.17508875796,
+    "q4_event_time_s_raw": 70759.97874952822,
+    "q3_max_C_at_event": 0.15000000000000002,
+    "q4_max_C_at_event": 0.15000000000000002,
+    "q3_hours": 16.468381969099433,
+    "q4_hours": 19.655549652646727,
+    "event_definition": "max_i C_i - 0.15 (node values, terminal, direction=-1)",
+    "grid": {
+      "q3_radial_intervals": 320,
+      "q3_nodes": 321,
+      "q3_node_centred_control_volumes": 321,
+      "q4_radial_intervals": 320,
+      "q4_nodes": 321,
+      "q4_node_centred_control_volumes": 321
+    }
+  },
+  "event_trace_max_C_at_event": {
+    "q3": {
+      "t_event_s_raw": 59286.17508875796,
+      "max_C_at_event": 0.15000000000000002
+    },
+    "q4": {
+      "t_event_s_raw": 70759.97874952822,
+      "max_C_at_event": 0.15000000000000002
+    }
+  }
+}

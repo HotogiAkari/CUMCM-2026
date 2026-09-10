@@ -1,0 +1,62 @@
+# CUMCM-2026 A 题 药材烘干 —— 主运行配置（YAML 规范格式）
+# 该文件是唯一权威参数源；src/drying_model 只从这里读取参数。
+
+runtime:
+  python_required: "3.12"
+  dtype: float64
+
+paths:
+  attachment1: "inputs/附件1.xlsx"
+  attachment2: "inputs/附件2.xlsx"
+  templates: "inputs/templates"
+  result_dir: "result"
+  output_dir: "result"
+  diagnostics_dir: "outputs/diagnostics"
+  tables_dir: "outputs/tables"
+
+geometry:
+  initial_radius_m: 0.02      # R0 = 2 cm
+  length_m: 0.25              # 圆柱长度 25 cm（只做径向，此值不参与计算）
+
+initial:
+  temperature_C: 28.0
+  moisture_dry_basis: 2.55
+
+boundary:
+  heat_transfer_W_m2K: 25.0   # h_T
+  mass_transfer_m_s: 8.0e-7   # h_C
+
+diffusivity:
+  # exp(-3850 / T_K)，T_K = T_摄氏度 + 273.15（正规化绝对温度倒数形式）
+  # 另一选项 strict_problem_text = exp(-3850 * T_K)，仅用于量级诊断
+  temperature_mode: arrhenius_inverse_T
+
+environment:
+  interpolation: linear        # 附件1分段线性
+  post_4h_mode: tail_1h_mean   # 4h 后延拓：附件1最后 1h 均值
+  tail_window_s: 3600.0        # 尾均值窗口（覆盖 10800..14400 s 共 61 点）
+
+radius_q4:
+  interpolation: pchip         # 附件2 半径主插值
+  post_72h_mode: last_value_hold
+
+solver:
+  method: BDF                  # scipy.integrate.solve_ivp
+  rtol: 1.0e-8
+  atol_temperature: 1.0e-8
+  atol_moisture: 1.0e-10
+  # N = 径向区间数；节点数 = N+1；节点中心控制体 = N+1（首末为半控制体）
+  radial_intervals: 320
+  event_threshold: 0.15
+  event_terminal: true
+  event_direction: -1.0
+  max_step_early: 60.0         # 0..14400 s 最大步长
+  max_step_late: 600.0         # 14400 s 之后最大步长
+  t_early: 14400.0
+  q23_t_end: 2000000.0         # 最大积分时间（Q3，事件未触发时的上限）
+  q4_t_end: 4000000.0          # 最大积分时间（Q4）
+
+output:
+  decimals: 4
+  distance_step_cm: 0.1
+  r_max_cm: 2.0

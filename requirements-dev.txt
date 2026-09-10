@@ -1,0 +1,4 @@
+# Development / verification extras.
+-r requirements.txt
+pytest>=8,<10
+pandas>=2.1,<4

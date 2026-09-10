@@ -1,0 +1,19 @@
+# 敏感性 / 收敛扫描配置。数值为相对基准配置（main.yaml）的倍数或直接取值。
+
+base_config: main.yaml
+
+sweeps:
+  # 表面传质系数 h_C 的倍数（基准 8e-7 m/s）
+  mass_transfer: [0.5, 1.0, 2.0, 4.0]
+  # 扩散系数 D 的整体缩放（对 Q3 附录3、Q4 附录4 各自整体乘该因子）
+  diffusivity: [0.5, 1.0, 2.0]
+  # 边界平衡含水率（环境水分势 C_a 的倍数）
+  equilibrium_moisture: [0.5, 1.0, 2.0]
+  # 4 h 之后环境延拓方式
+  environment: [tail_1h_mean, constant_setpoint, last_value_hold]
+  # 问题4 半径插值模型
+  radius: [pchip, linear, fixed_R0]
+  # 径向区间数（Q3/Q4 终点收敛与 Q1 场量收敛共用）
+  radial_intervals: [160, 320, 640]
+  # 时间相对容差（绝对容差按 atol_T=rtol, atol_C=rtol/100 配套）
+  tolerance: [1.0e-7, 1.0e-8, 1.0e-9]

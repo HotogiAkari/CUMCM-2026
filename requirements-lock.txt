@@ -1,0 +1,13 @@
+# Top-level dependency version snapshot from the reference run environment
+# (Ubuntu 24.04 system Python 3.12.3, WSL2 Linux x86_64).
+#
+# NOTE: this pins the top-level requirements only; it is not a full lock file
+# (no transitive dependencies or hashes). Matplotlib is not part of the
+# delivered pipeline, so it is not listed here.
+numpy==1.26.4
+scipy==1.11.4
+openpyxl==3.1.2
+PyYAML==6.0.3
+# Development / verification:
+pytest==9.1.1
+pandas==2.1.4

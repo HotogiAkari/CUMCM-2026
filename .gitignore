@@ -1,0 +1,14 @@
+# 缓存与临时文件
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# 打包/传输产物（不进库）
+*.rar
+*.zip
+figures_matlab/
+
+# 系统文件
+.DS_Store
+Thumbs.db
