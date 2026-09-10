@@ -37,6 +37,12 @@ description: "按模板交付数值模型结果：小网格冒烟、网格与容
 
 10. **随包发布未舍入原值与事件邻域轨迹。** 导出 `event_raw.json`（raw 秒数、事件处 max 状态、阈值与方向定义），并输出终点前后 ±120 s、每 1 s 一行的轨迹（**整秒网格 + 精确事件行**；列含 max 状态、argmax 索引与坐标、中心值、表面值、`event_value = max状态 − 阈值`）。小时数**一律由未舍入秒数换算后再舍入**，绝不用已舍入秒数反算（例：70759.978 s→19.6555 h，而 70760.0 s→19.6556 h）。
 
+11. **交付后整理工作区并发布到已有仓库。**
+    - **合并重复输出目录。** 结果同时写在两处时（如 `outputs/official/` 与 `result/`），只留一个权威目录并删副本；拷贝前比较 `resolve()`，相同则跳过（否则 SameFileError）。
+    - **删构建产物、留用户文件。** 删 `__pycache__/`、`.pytest_cache/` 与临时打包物；**用户自建的压缩包/草稿不要删**，写进 `.gitignore` 让它们不进库，并在汇报里说明。
+    - **push 被拒是非快进信号，不是错误。** `git fetch origin` → `git log --oneline origin/main`、`git diff --stat HEAD origin/main` 看清远端多出的是什么 → 无冲突则 `git rebase origin/main` 再 push。**绝不 force push 覆盖别人的提交。** 完成判据：`git status -sb` 显示与 `origin/main` 同步。
+    - **先让环境自洽再提交。** 改过输出目录/输入路径后重跑一次生成器确认产物一致；独立脚本的输入路径从 `__file__` 解析，优先 `inputs/`、缺失时回退项目根。
+
 ## 注意
 
 - 配置默认用 JSON；**只有当对方明确要求 YAML 时才装 pyyaml**，不为一个格式依赖擅自改系统 Python。
