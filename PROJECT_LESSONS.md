@@ -1,5 +1,8 @@
 # PROJECT_LESSONS — CUMCM-2026 A 题 药材烘干
 
+> 本项目经验已同步整理到工作区经验系统：`PROJECT_LESSONS.md`（P-009~P-018）
+> 与 `KNOWLEDGE.md`（K-001~K-007 候选泛用经验）。本文件为项目内副本。
+
 ## 文档冲突：问题2的起始状态
 type: fact
 status: to-review
